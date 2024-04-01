@@ -11,7 +11,6 @@ router.post("/cart/add", jwtVerify, async (req, res) => {
     try {     
      const userID = req.body.userId || "";
         const { itemId,quantity, colour} = req.body;
-        console.log(itemId + quantity + colour);
         if (!itemId || !quantity || !colour ) {
             return res.status(400).json({
                 errorMessage: "Bad Request",
@@ -102,16 +101,5 @@ router.get("/item/:itemid",jwtVerify, async (req, res) => {
      }
  });
 
-
-router.delete("/task/:taskId",jwtVerify, async (req, res) => {
-    try {
-        const taskId = req.params.taskId;
-        const title = req.query.title || "";
-        const taskList = await task.deleteOne({_id:taskId});
-        res.json({ data: taskList });
-    } catch (error) {
-        console.log(error);
-    }
-});
 
 module.exports = router;

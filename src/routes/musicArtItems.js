@@ -28,7 +28,6 @@ router.post("/create",  async (req, res) => {
           // refUserId: req.body.userId,
         });
 
-        console.log("everything is present");
         await musicArtItemDetails.save();
 
         res.json({ message: "New MusicItem created successfully" });
@@ -75,7 +74,6 @@ router.get("/item/:itemid",jwtVerify, async (req, res) => {
             }
           }
         ];
-        console.log(pipeline);
         const musicArtItemList =  await musicArtItem.aggregate(pipeline);
         if(musicArtItemList.length<0)
         {
