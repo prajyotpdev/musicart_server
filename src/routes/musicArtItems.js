@@ -8,8 +8,7 @@ const { ObjectId } = require("mongodb");
 router.post("/create",  async (req, res) => {
     try {
         const { displayName,type, price, colour, description,company,aboutItem,isAvailable, displayImageList } = req.body;
-console.log(displayName+type + price + colour + description +company+aboutItem+isAvailable +displayImageList);
-        if (!displayName || !type || !price || !colour || !description ||!company|| !aboutItem ||!isAvailable || !displayImageList) {
+        if (!displayName || !type || !price || !colour || !description ||!company|| !aboutItem  || !displayImageList) {
             return res.status(400).json({
                 errorMessage: "Bad Request",
             });
@@ -29,6 +28,7 @@ console.log(displayName+type + price + colour + description +company+aboutItem+i
           // refUserId: req.body.userId,
         });
 
+        console.log("everything is present");
         await musicArtItemDetails.save();
 
         res.json({ message: "New MusicItem created successfully" });
@@ -63,7 +63,7 @@ router.get("/item/:itemid",jwtVerify, async (req, res) => {
      }
  });
 
- router.get("/filter",jwtVerify, async (req, res) => {
+ router.post("/filter",jwtVerify, async (req, res) => {
      try {          
           const query = {};
         const userID = req.body.userId || "";
